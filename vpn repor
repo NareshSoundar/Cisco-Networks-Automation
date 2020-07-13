@@ -1,0 +1,38 @@
+from netmiko import ConnectHandler
+from operator import itemgetter
+import json
+import pprint
+CTCvpn = {
+    'ip':   '192.168.120.133',
+    'username': 'play',
+    'password': 'play',
+    'device_type': 'cisco_ios',
+}
+net_connect = ConnectHandler(**CTCvpn)
+print("connecting CTC VPN firewall")
+output = net_connect.send_command('show ip int brief')
+line1 = "CTC VPN Firewall Status"
+line2 = "============================================================================================"
+line3 =  output
+line4 = "=======================================END============================================================"
+with open('play.txt','a') as out:
+    out.write('{}\n{}\n{}\n{}\n'.format(line1,line2,line3,line4))
+
+print("CTC VPN complted ")
+
+UKvpn = {
+    'ip':   '192.168.120.136',
+    'username': 'play1',
+    'password': 'play',
+    'device_type': 'cisco_ios',
+}
+net_connect = ConnectHandler(**UKvpn)
+print("connecting UK VPN firewall")
+output = net_connect.send_command('show ip int brief')
+line1 = "CTC UK Firewall Status"
+line2 = "============================================================================================"
+line3 =  output
+line4 = "=======================================END============================================================"
+with open('play.txt','a') as out:
+    out.write('{}\n{}\n{}\n{}\n'.format(line1,line2,line3,line4))
+print("UK vpn complted ")
